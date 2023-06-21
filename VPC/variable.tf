@@ -1,3 +1,3 @@
-variable regions{
+variable region{
     type = string
 }
