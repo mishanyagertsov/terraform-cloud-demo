@@ -25,8 +25,9 @@ module "asg" {
 resource "aws_elb" "bar" {
   name = "foobar-terraform-elbs"
   availability_zones = data.terraform_remote_state.vpc.outputs.azs
-  security_groups = [aws_security_group.asg-sec-group.id]
-
+  security_groups = [
+    aws_security_group.lb-firewall.id
+  ]
 
 listener {
 instance_port = 80
@@ -48,7 +49,4 @@ cross_zone_load_balancing = true
 idle_timeout = 400
 connection_draining = true
 connection_draining_timeout = 400
-
-
-
 }
